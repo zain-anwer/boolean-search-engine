@@ -1,4 +1,4 @@
-# the steps even though may give overlapping results are shown individually for clarity
+# the steps even though may give overlapping results are shown individually for clarity# since document ids (numbers) in the folder aren't sequential we will sort each posting list after insertion
 
 import unicodedata
 import re
