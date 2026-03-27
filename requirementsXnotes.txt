@@ -1,3 +1,0 @@
-list.extend() --> used to add a list to another list
-list.append() --> add a single element or to nest lists
-list.sort() --> does in-place sorting and returns None
