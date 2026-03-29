@@ -3,13 +3,17 @@ from util.intersect import intersect
 from util.union import union
 from util.negate import negate
 from util.proximity_intersect import proximity_intersect
+from src.indexer import createInvertedIndex
 
 from util.postfix_converter import convert_to_postfix
 from nltk import PorterStemmer
 import json 
+import time
 
 def search(query:str):
     
+    createInvertedIndex("data/Trump Speeches/")
+
     terms = normalize_query(query)
     print(terms)
     
