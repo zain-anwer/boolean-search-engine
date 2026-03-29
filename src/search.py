@@ -47,6 +47,11 @@ def search(query:str):
         if len(terms) > 2:
             val = int(terms[2]) # converting it into integer from string
 
+        # --- checking if words exist before searching or else it'll throw a type errorrr ---
+        
+        if terms[0] not in index["positional"] or terms[1] not in index["positional"]:
+            return []
+
         return proximitySearch(terms[0],terms[1],val,index["positional"])
 
 
