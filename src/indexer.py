@@ -1,7 +1,9 @@
 from pathlib import Path                       # to loop over directory
 from util.normalizer import normalize_tokens   # to normalize tokens
 import re                                      # to extract doc_id from name
-import json
+import json                                    # to store indexes in json file
+from nltk import PorterStemmer                 # for stemming
+
 
 # document ids are being extracted through document names
 # instead of removing stopwords before addition to inverted_index/positional_index, we skip them to keep the position values of each word accurate
@@ -32,6 +34,9 @@ def createInvertedIndex(folder_path):
     with open("data/Stopword List.txt",'r') as stopword_file:
         stopwords = stopword_file.read().split()
 
+    # create stemmer
+    stemmer = PorterStemmer()
+
     for file_path in directory.glob('*.txt'):
         
         doc_id = re.sub(r'[^0-9]','',file_path.name)
@@ -50,6 +55,9 @@ def createInvertedIndex(folder_path):
             if token in stopwords:
                 continue;
             
+            # reducing token to it's stem
+            token = stemmer.stem(token)
+
             # adding tokens to inverted_index
             
             if token in inverted_index:
