@@ -50,11 +50,12 @@ def createInvertedIndex(folder_path):
         normalized_token_list = normalize_tokens(token_list)
 
         for position, token in enumerate(normalized_token_list):
-            
+
+
             # skipping stopwords
             if token in stopwords:
                 continue;
-            
+
             # reducing token to it's stem
             token = stemmer.stem(token)
 
