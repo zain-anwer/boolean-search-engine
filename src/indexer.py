@@ -46,7 +46,7 @@ def createInvertedIndex(folder_path):
             content = file.read()
         
         # tokenize the output based on spaces
-        token_list = re.split(r'[\s,.?!\-/\\()\[\]"\'\:]+',content)
+        token_list = re.split(r'[\s,.?!\-/\\()\[\]"\'\:_]+',content)
         normalized_token_list = normalize_tokens(token_list)
 
         for position, token in enumerate(normalized_token_list):

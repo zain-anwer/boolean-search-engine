@@ -35,6 +35,7 @@ def normalize_query(query):
     # this helps standardize query format and prevent splitting to group brackets with words
 
     query = query.replace('(',' ( ').replace(')',' ) ')
+    query = query.replace('_', ' ').replace('-', ' ')
     
     # converting everything to lowercase
 
@@ -50,7 +51,19 @@ def normalize_query(query):
     terms = query.split()
 
     # stemming for consistency (we stem the token in index as well)
+    # we won't be stemming operators and brackets
 
+
+    # FIX 2: Do not stem operators or brackets
+    
     stemmer = PorterStemmer()
-    terms[:] = [stemmer.stem(term) for term in terms]
-    return terms
+    operators = {'and', 'or', 'not', '(', ')'}
+    
+    normalized_terms = []
+    for term in terms:
+        if term in operators:
+            normalized_terms.append(term)
+        else:
+            normalized_terms.append(stemmer.stem(term))
+    
+    return normalized_terms
